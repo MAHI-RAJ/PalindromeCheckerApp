@@ -6,37 +6,34 @@ public class PalindromeCheckerApp {
 
         Scanner scanner = new Scanner(System.in);
 
+        System.out.println("=== UC7: Deque Based Palindrome Check ===");
+
         System.out.print("Enter a word: ");
         String input = scanner.nextLine();
 
-        Stack<Character> stack = new Stack<>();
-        Queue<Character> queue = new LinkedList<>();
 
-        // Add characters to both stack and queue
+        Deque<Character> deque = new LinkedList<>();
+
+        // Add characters to deque
         for(char c : input.toCharArray()) {
-            stack.push(c);
-            queue.add(c);
-        }
+            deque.add(c);
 
         boolean isPalindrome = true;
-
-        // Compare elements
-        while(!stack.isEmpty()) {
-            if(stack.pop() != queue.remove()) {
+        // Compare from both ends
+        while(deque.size() > 1) {
+            if(deque.removeFirst() != deque.removeLast()) {
                 isPalindrome = false;
                 break;
             }
         }
 
         if(isPalindrome) {
-            System.out.println(input + " is a Palindrome (Stack + Queue Method)");
+            System.out.println(input + " is a Palindrome (Deque Method)");
         } else {
             System.out.println(input + " is NOT a Palindrome");
-
         }
 
         scanner.close();
+
     }
 }
-
-  
