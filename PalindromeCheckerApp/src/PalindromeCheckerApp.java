@@ -5,7 +5,6 @@ public class PalindromeCheckerApp {
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
-        System.out.println("=== UC6: Queue + Stack Palindrome Check ===");
 
         System.out.print("Enter a word: ");
         String input = scanner.nextLine();
@@ -33,8 +32,11 @@ public class PalindromeCheckerApp {
             System.out.println(input + " is a Palindrome (Stack + Queue Method)");
         } else {
             System.out.println(input + " is NOT a Palindrome");
+
         }
 
         scanner.close();
     }
 }
+
+  
