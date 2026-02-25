@@ -1,3 +1,4 @@
+
 public static void main(String[] args) {
 
     System.out.println("=== PALINDROME CHECKER APP ===");
@@ -28,5 +29,7 @@ public static void main(String[] args) {
         }
 
         scanner.close();
+
     }
+
 }
