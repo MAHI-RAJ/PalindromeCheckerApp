@@ -1,31 +1,35 @@
-import java.util.Scanner;
 
-public class PalindromeCheckerApp {
+public static void main(String[] args) {
 
-    public static void main(String[] args) {
-        String word = "madam";
+    System.out.println("=== PALINDROME CHECKER APP ===");
 
-        if (word.equals(new StringBuilder(word).reverse().toString())) {
-            System.out.println(word + " is a Palindrome");
-            System.out.println("=== PALINDROME CHECKER APP ===");
+    Scanner scanner = new Scanner(System.in);
 
-            Scanner scanner = new Scanner(System.in);
+    System.out.print("Enter a word: ");
+    String input = scanner.nextLine();
 
-            System.out.print("Enter a word: ");
-            String input = scanner.nextLine();
+    String reversed = new StringBuilder(input).reverse().toString();
+    char[] chars = input.toCharArray();
+    boolean isPalindrome = true;
 
-            String reversed = new StringBuilder(input).reverse().toString();
-
-            if (input.equalsIgnoreCase(reversed)) {
-                System.out.println(input + " is a Palindrome");
-            } else {
-                System.out.println(word + " is Not a Palindrome");
-                System.out.println(input + " is NOT a Palindrome");
-            }
-
-            scanner.close();
-
+    for (int i = 0; i < chars.length / 2; i++) {
+        if (chars[i] != chars[chars.length - 1 - i]) {
+            isPalindrome = false;
+            break;
         }
+    }
+
+    if (input.equalsIgnoreCase(reversed)) {
+        System.out.println(input + " is a Palindrome");
+        if (isPalindrome) {
+            System.out.println("Palindrome (Character Array Method)");
+        } else {
+            System.out.println(input + " is NOT a Palindrome");
+            System.out.println("Not a Palindrome");
+        }
+
+        scanner.close();
+
     }
 
 }
