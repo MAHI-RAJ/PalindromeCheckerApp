@@ -1,3 +1,4 @@
+
 import java.util.Scanner;
 
 public class UseCase9PalindromeCheckerApp {
