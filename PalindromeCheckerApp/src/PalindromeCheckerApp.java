@@ -1,34 +1,42 @@
 import java.util.Scanner;
- public class PalindromeCheckerApp {
 
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("--- UC10: Case-Insensitive & Space-Ignored Checker ---");
-        System.out.print("Enter a string: ");
-        String input = sc.nextLine();
+class PalindromeService {
+    public boolean checkPalindrome(String input) {
+        if (input == null) return false;
 
-         String cleanString = input.replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
+        // Normalization logic (Reuse from UC10)
+        String clean = input.replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
 
-            if (isPalindrome(cleanString)) {
-            System.out.println("Result: \"" + input + "\" IS a palindrome (ignoring case/spaces).");
-        } else {
-            System.out.println("Result: \"" + input + "\" IS NOT a palindrome.");
-        }
-
-        sc.close();
-    }
-
-    public static boolean isPalindrome(String s) {
+        // Logical check
         int left = 0;
-        int right = s.length() - 1;
-
+        int right = clean.length() - 1;
         while (left < right) {
-            if (s.charAt(left) != s.charAt(right)) {
+            if (clean.charAt(left) != clean.charAt(right)) {
                 return false;
             }
             left++;
             right--;
         }
         return true;
+    }
+}
+
+public class PalindromeCheckerApp {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        PalindromeService service = new PalindromeService();
+
+        System.out.println("--- UC11: Object-Oriented Palindrome Service ---");
+        System.out.print("Enter text: ");
+        String text = sc.nextLine();
+
+        if (service.checkPalindrome(text)) {
+            System.out.println("Success: This is a palindrome!");
+        } else {
+            System.out.println("Failure: This is not a palindrome.");
+        }
+
+        sc.close();
     }
 }
