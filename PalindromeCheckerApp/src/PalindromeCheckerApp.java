@@ -1,39 +1,29 @@
-import java.util.*;
 
-public class PalindromeCheckerApp {
+// Simplified Logic for UC8
+public boolean isPalindrome(Node head) {
+    if (head == null || head.next == null) return true;
 
-    public static void main(String[] args) {
-
-        Scanner scanner = new Scanner(System.in);
-
-        System.out.println("=== UC7: Deque Based Palindrome Check ===");
-
-        System.out.print("Enter a word: ");
-        String input = scanner.nextLine();
-
-
-        Deque<Character> deque = new LinkedList<>();
-
-        // Add characters to deque
-        for(char c : input.toCharArray()) {
-            deque.add(c);
-
-        boolean isPalindrome = true;
-        // Compare from both ends
-        while(deque.size() > 1) {
-            if(deque.removeFirst() != deque.removeLast()) {
-                isPalindrome = false;
-                break;
-            }
-        }
-
-        if(isPalindrome) {
-            System.out.println(input + " is a Palindrome (Deque Method)");
-        } else {
-            System.out.println(input + " is NOT a Palindrome");
-        }
-
-        scanner.close();
-
+    Node slow = head, fast = head;
+    while (fast != null && fast.next != null) {
+        slow = slow.next;
+        fast = fast.next.next;
     }
+
+
+    Node prev = null, curr = slow;
+    while (curr != null) {
+        Node nextTemp = curr.next;
+        curr.next = prev;
+        prev = curr;
+        curr = nextTemp;
+    }
+
+
+    Node firstHalf = head, secondHalf = prev;
+    while (secondHalf != null) {
+        if (firstHalf.data != secondHalf.data) return false;
+        firstHalf = firstHalf.next;
+        secondHalf = secondHalf.next;
+    }
+    return true;
 }
