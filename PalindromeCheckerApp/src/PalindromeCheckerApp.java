@@ -1,3 +1,4 @@
+
 // Simplified Logic for UC8
 public boolean isPalindrome(Node head) {
     if (head == null || head.next == null) return true;
