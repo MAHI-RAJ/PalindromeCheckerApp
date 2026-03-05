@@ -1,39 +1,38 @@
-import java.util.*;
+import java.util.Scanner;
 
 public class PalindromeCheckerApp {
 
     public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("--- UC10: Case-Insensitive & Space-Ignored Checker ---");
+        System.out.print("Enter a string: ");
+        String input = sc.nextLine();
 
-        Scanner scanner = new Scanner(System.in);
+        // Step 1: Normalize the string
+        // Remove all non-alphanumeric characters and convert to lowercase
+        String cleanString = input.replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
 
-        System.out.println("=== UC7: Deque Based Palindrome Check ===");
-
-        System.out.print("Enter a word: ");
-        String input = scanner.nextLine();
-
-
-        Deque<Character> deque = new LinkedList<>();
-
-        // Add characters to deque
-        for(char c : input.toCharArray()) {
-            deque.add(c);
-
-        boolean isPalindrome = true;
-        // Compare from both ends
-        while(deque.size() > 1) {
-            if(deque.removeFirst() != deque.removeLast()) {
-                isPalindrome = false;
-                break;
-            }
-        }
-
-        if(isPalindrome) {
-            System.out.println(input + " is a Palindrome (Deque Method)");
+        // Step 2: Check if the normalized string is a palindrome
+        if (isPalindrome(cleanString)) {
+            System.out.println("Result: \"" + input + "\" IS a palindrome (ignoring case/spaces).");
         } else {
-            System.out.println(input + " is NOT a Palindrome");
+            System.out.println("Result: \"" + input + "\" IS NOT a palindrome.");
         }
 
-        scanner.close();
+        sc.close();
+    }
 
+    public static boolean isPalindrome(String s) {
+        int left = 0;
+        int right = s.length() - 1;
+
+        while (left < right) {
+            if (s.charAt(left) != s.charAt(right)) {
+                return false;
+            }
+            left++;
+            right--;
+        }
+        return true;
     }
 }
