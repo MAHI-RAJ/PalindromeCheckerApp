@@ -1,39 +1,42 @@
-import java.util.*;
+import java.util.Scanner;
 
-public class PalindromeCheckerApp {
+class PalindromeService {
+    public boolean checkPalindrome(String input) {
+        if (input == null) return false;
 
-    public static void main(String[] args) {
+        // Normalization logic (Reuse from UC10)
+        String clean = input.replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
 
-        Scanner scanner = new Scanner(System.in);
-
-        System.out.println("=== UC7: Deque Based Palindrome Check ===");
-
-        System.out.print("Enter a word: ");
-        String input = scanner.nextLine();
-
-
-        Deque<Character> deque = new LinkedList<>();
-
-        // Add characters to deque
-        for(char c : input.toCharArray()) {
-            deque.add(c);
-
-        boolean isPalindrome = true;
-        // Compare from both ends
-        while(deque.size() > 1) {
-            if(deque.removeFirst() != deque.removeLast()) {
-                isPalindrome = false;
-                break;
+        // Logical check
+        int left = 0;
+        int right = clean.length() - 1;
+        while (left < right) {
+            if (clean.charAt(left) != clean.charAt(right)) {
+                return false;
             }
+            left++;
+            right--;
         }
+        return true;
+    }
+}
 
-        if(isPalindrome) {
-            System.out.println(input + " is a Palindrome (Deque Method)");
+public class UseCase11PalindromeCheckerApp {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        PalindromeService service = new PalindromeService();
+
+        System.out.println("--- UC11: Object-Oriented Palindrome Service ---");
+        System.out.print("Enter text: ");
+        String text = sc.nextLine();
+
+        if (service.checkPalindrome(text)) {
+            System.out.println("Success: This is a palindrome!");
         } else {
-            System.out.println(input + " is NOT a Palindrome");
+            System.out.println("Failure: This is not a palindrome.");
         }
 
-        scanner.close();
-
+        sc.close();
     }
 }
