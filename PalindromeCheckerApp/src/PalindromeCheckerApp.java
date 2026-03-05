@@ -1,39 +1,34 @@
-import java.util.*;
+import java.util.Scanner;
 
-public class PalindromeCheckerApp {
+public class UseCase9PalindromeCheckerApp {
 
     public static void main(String[] args) {
-
-        Scanner scanner = new Scanner(System.in);
-
-        System.out.println("=== UC7: Deque Based Palindrome Check ===");
-
-        System.out.print("Enter a word: ");
-        String input = scanner.nextLine();
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter a string to check: ");
+        String word = sc.nextLine();
 
 
-        Deque<Character> deque = new LinkedList<>();
+        String cleanWord = word.replaceAll("\\s+", "").toLowerCase();
 
-        // Add characters to deque
-        for(char c : input.toCharArray()) {
-            deque.add(c);
-
-        boolean isPalindrome = true;
-        // Compare from both ends
-        while(deque.size() > 1) {
-            if(deque.removeFirst() != deque.removeLast()) {
-                isPalindrome = false;
-                break;
-            }
-        }
-
-        if(isPalindrome) {
-            System.out.println(input + " is a Palindrome (Deque Method)");
+        if (isPalindrome(cleanWord)) {
+            System.out.println(word + " is a Palindrome");
         } else {
-            System.out.println(input + " is NOT a Palindrome");
+            System.out.println(word + " is Not a Palindrome");
+        }
+        sc.close();
+    }
+
+    public static boolean isPalindrome(String s) {
+
+        if (s.length() <= 1) {
+            return true;
         }
 
-        scanner.close();
+        if (s.charAt(0) == s.charAt(s.length() - 1)) {
+            return isPalindrome(s.substring(1, s.length() - 1));
+        }
 
+
+        return false;
     }
 }
