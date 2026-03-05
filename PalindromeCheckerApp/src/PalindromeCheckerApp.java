@@ -1,29 +1,35 @@
 
-// Simplified Logic for UC8
-public boolean isPalindrome(Node head) {
-    if (head == null || head.next == null) return true;
+import java.util.Scanner;
 
-    Node slow = head, fast = head;
-    while (fast != null && fast.next != null) {
-        slow = slow.next;
-        fast = fast.next.next;
+public class UseCase9PalindromeCheckerApp {
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter a string to check: ");
+        String word = sc.nextLine();
+
+
+        String cleanWord = word.replaceAll("\\s+", "").toLowerCase();
+
+        if (isPalindrome(cleanWord)) {
+            System.out.println(word + " is a Palindrome");
+        } else {
+            System.out.println(word + " is Not a Palindrome");
+        }
+        sc.close();
     }
 
+    public static boolean isPalindrome(String s) {
 
-    Node prev = null, curr = slow;
-    while (curr != null) {
-        Node nextTemp = curr.next;
-        curr.next = prev;
-        prev = curr;
-        curr = nextTemp;
+        if (s.length() <= 1) {
+            return true;
+        }
+
+        if (s.charAt(0) == s.charAt(s.length() - 1)) {
+            return isPalindrome(s.substring(1, s.length() - 1));
+        }
+
+
+        return false;
     }
-
-
-    Node firstHalf = head, secondHalf = prev;
-    while (secondHalf != null) {
-        if (firstHalf.data != secondHalf.data) return false;
-        firstHalf = firstHalf.next;
-        secondHalf = secondHalf.next;
-    }
-    return true;
 }
