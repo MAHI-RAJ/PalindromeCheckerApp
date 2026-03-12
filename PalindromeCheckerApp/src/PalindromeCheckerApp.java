@@ -1,7 +1,6 @@
 import java.util.Scanner;
 
 public class PalindromeCheckerApp {
-
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
@@ -67,5 +66,4 @@ public class PalindromeCheckerApp {
         System.out.printf("%-25s | %-15d\n", "Two-Pointer Manual", d2);
         System.out.printf("%-25s | %-15d\n", "Recursive Approach", d3);
         System.out.println("-------------------------------------------------");
-    }
 }
